@@ -3,10 +3,19 @@ return function(module, proxied_dependencies)
 
   for k, v in pairs(proxied_dependencies) do
     cache_copy[k] = package.loaded[k]
-    package.loaded[k] = v
   end
 
+  table.insert(package.searchers or package.loaders, 1, function(path)
+    if proxied_dependencies[path] then
+      return function()
+        return proxied_dependencies[path]
+      end
+    end
+  end)
+
   local required = require(module)
+
+  table.remove(package.searchers or package.loaders, 1)
 
   for k in pairs(proxied_dependencies) do
     package.loaded[k] = nil
