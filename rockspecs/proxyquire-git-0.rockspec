@@ -1,7 +1,8 @@
 package = 'proxyquire'
 version = 'git-0'
 source = {
-  url = 'git://github.com/ryanplusplus/proxyquire.lua.git'
+  url = 'https://github.com/ryanplusplus/proxyquire.lua/archive/master.zip',
+  dir = 'proxyquire.lua-master/src'
 }
 description = {
   summary = 'Allows Lua modules to be overridden during testing. See https://github.com/thlorenz/proxyquire.',
