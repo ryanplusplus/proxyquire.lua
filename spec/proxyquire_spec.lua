@@ -7,7 +7,7 @@ describe('proxyquire', function()
       b = {}
     }
 
-    local actual = proxyquire('test_helper', { a = expected.a, b = expected. b })
+    local actual = proxyquire('test_helper', { a = expected.a, b = expected.b })
 
     assert.are.equal(expected.a, actual.a)
     assert.are.equal(expected.b, actual.b)
