@@ -9,6 +9,8 @@
 ]]
 
 return function(module, proxied_dependencies)
+  package.loaded[module] = nil
+  
   local cache_copy = {}
 
   for k, v in pairs(proxied_dependencies) do
