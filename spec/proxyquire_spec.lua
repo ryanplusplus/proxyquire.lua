@@ -31,10 +31,23 @@ describe('proxyquire', function()
 
     local actual = proxyquire('test_helper', { a = { proxy_this = 4 } })
 
-    for k, v in pairs(actual.a) do print(k, v) end
     assert.are.equal(4, actual.a.proxy_this)
     assert.are.equal(2, actual.a.not_proxied)
-    print('eyy')
+  end)
+
+  it('should do a deep merge', function()
+    package.loaded.a = {
+      something = {
+        proxied = 5,
+        not_proxied = 9
+      },
+      not_proxied = 2
+    }
+
+    local actual = proxyquire('test_helper', { a = { proxy_this = 4 } })
+
+    assert.are.equal(5, actual.a.something.proxied)
+    assert.are.equal(2, actual.a.something.not_proxied)
   end)
 
   it('should replace proxied dependencies when finished', function()

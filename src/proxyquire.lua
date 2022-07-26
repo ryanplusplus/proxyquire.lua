@@ -19,7 +19,9 @@ return function(module, proxied_dependencies)
     dependencies[module_name] = overrides
     if type(cache_copy[module_name]) == 'table' then
       for k, v in pairs(cache_copy[module_name]) do
-        print(k, v)
+        if not overrides[k] then
+          dependencies[module_name][k] = v
+        end
       end
     end
 
