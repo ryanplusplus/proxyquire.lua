@@ -23,6 +23,20 @@ describe('proxyquire', function()
     assert.are.equal(4, actual.b)
   end)
 
+  it('should pass through functionality that is not specified', function()
+    package.loaded.a = {
+      proxy_this = 1,
+      not_proxied = 2
+    }
+
+    local actual = proxyquire('test_helper', { a = { proxy_this = 4 } })
+
+    for k, v in pairs(actual.a) do print(k, v) end
+    assert.are.equal(4, actual.a.proxy_this)
+    assert.are.equal(2, actual.a.not_proxied)
+    print('eyy')
+  end)
+
   it('should replace proxied dependencies when finished', function()
     local b = {}
 
